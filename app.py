@@ -75,7 +75,7 @@ def render_module1_preset_page():
     st.title("📌 Module 1 — Preset Values (Scenario Setup)")
     st.caption("These presets define the scenario and are used by all later modules.")
     with st.expander("ℹ️ Help: Module 1 Presets (Assumptions, Units, Rules)", expanded=False):
-    st.markdown("""
+     st.markdown("""
 ### What is Module 1?
 Module 1 is the scenario lock. Every later module (Planner → Deterministic → Stress Test → Consultant Score)
 uses these values. If something looks “wrong” later, 90% of the time the reason is here.
