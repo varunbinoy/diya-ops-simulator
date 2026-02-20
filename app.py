@@ -1140,7 +1140,7 @@ if page == "Home":
 
     Think like a consultant. Decide like a COO.
     """)
-elif page == "How To Play":
+elif page == "How to Play":
 
     st.title("📘 How To Play")
 
