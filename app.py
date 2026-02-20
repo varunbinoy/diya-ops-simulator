@@ -74,6 +74,157 @@ def render_module1_preset_page():
 
     st.title("📌 Module 1 — Preset Values (Scenario Setup)")
     st.caption("These presets define the scenario and are used by all later modules.")
+    with st.expander("ℹ️ Help: Module 1 Presets (Assumptions, Units, Rules)", expanded=False):
+    st.markdown("""
+### What is Module 1?
+Module 1 is the scenario lock. Every later module (Planner → Deterministic → Stress Test → Consultant Score)
+uses these values. If something looks “wrong” later, 90% of the time the reason is here.
+
+---
+
+## 1) Base Demand Forecast
+What is it?  
+Demand is the number of units customers want in each bi-week (B1…B6).
+
+Units: units per bi-week  
+Used in: Module 2 (planning), Module 3 (cost/service), Module 4 (stress), Module 5 (score)
+
+Common doubts
+- Is demand production target? No. Demand is *required output*. Your production may be lower/higher.
+- If I produce more than demand? Extra becomes inventory (if warehouse allows).
+- If I produce less than demand? You get lost sales + penalty.
+
+---
+
+## 2) Capacity & Rental Levers (Big picture)
+You have two hard constraints that can block service:
+1) Kiln (bottleneck): limits how much can be produced
+2) Warehouse (storage): limits how much can be held as inventory
+
+Rentals temporarily increase capacity but add fixed costs per bi-week.
+
+---
+
+## 3) Kiln (Bottleneck)
+Kiln design cap / bi-week  
+This is the maximum throughput per bi-week (before efficiency adjustment).
+
+Effective factor (alpha)  
+Realistic efficiency factor applied to kiln output.  
+So effective kiln capacity ≈ design_cap × alpha (unless rental/OT boosts apply).
+
+Machine rental adds  
+Adds +10,000 to kiln design cap for that bi-week.
+
+Machine rental cost  
+₹40,000 per bi-week whenever rental is ON.
+
+OT rule (important)  
+OT is treated like extra shift effort: it can increase feasible production, but OT is capped at 20%
+and it adds OT premium costs.
+
+Common doubts
+- Why kiln matters if I have many workers? Workers can’t exceed kiln throughput.
+- Do I pay kiln rental cost even if I barely use it? Yes—fixed cost for that period.
+- Is alpha applied after rental? In most designs, yes (effective capacity based on updated design cap).
+
+---
+
+## 4) Warehouse (Storage)
+Base warehouse cap  
+Maximum inventory you can hold safely.
+
+Warehouse rental adds  
+Adds +30,000 inventory capacity for that bi-week.
+
+Warehouse rental cost  
+₹30,000 per bi-week whenever rental is ON.
+
+Overflow handling (forced liquidation)  
+Inventory is capped. If produced inventory exceeds capacity, excess is forcibly liquidated.
+
+Liquidation loss / unit  
+You recover only salvage value (₹3) vs internal cost (₹6) → value destruction.
+
+Common doubts
+- Does overflow mean lost sales? No. Overflow is the *opposite* problem: you produced too much.
+- Why is liquidation bad? You’ve already paid production + wages, then you sell below cost.
+
+---
+
+## 5) Workforce Rules & Costs
+### New-hire productivity ramp
+New hires are only 50% productive in the hire bi-week, then 100% next bi-week.
+This prevents “hire huge today, instantly solve demand” unrealistic behavior.
+
+### OT maximum
+OT cannot exceed 20%.
+
+### Wage
+₹9,000 per worker per bi-week (fixed workforce cost).
+
+### Hiring base cost
+₹12,000 per worker (one-time cost when hiring).
+
+### Firing cost
+0.5 × wage = ₹4,500 per worker (one-time cost when firing).
+
+### Hiring multipliers (seasonal)
+Hiring cost increases as the season progresses.  
+B5/B6 can be ~2× B1, meaning late hiring is expensive.
+
+Common doubts
+- Do I pay wage for new hires immediately? Yes, once hired they add to workforce cost.
+- Does hiring multiplier affect wages? No. Only hiring cost, not wage.
+- Why does late hiring cost more? Market tightness, urgency premiums, onboarding stress.
+
+---
+
+## 6) Other Cost Parameters (₹)
+Internal variable cost (₹/unit)  
+Production cost per unit, applied to produced units.
+
+OT premium (₹/unit × OT%)  
+Extra cost due to OT intensity. (Higher OT → higher incremental cost.)
+
+Subcontract (₹/unit)  
+If allowed in later modules, subcontracting produces units at ₹9 each.
+Holding (₹/unit/bi-week)  
+Inventory carrying cost. Keeping stock is not free.
+
+Lost sales penalty (₹/unit)  
+Penalty when demand isn’t met. Represents lost margin + reputation/customer impact.
+
+Salvage (₹/unit)  
+Value recovered on forced liquidation or disposal.
+
+Common doubts
+- Is lost sales penalty revenue? No. It’s a penalty/cost.
+- Why is lost sales penalty high (₹20)? To strongly discourage service failure.
+
+---
+
+## 7) Stress Testing Defaults (Module 4)
+Monte Carlo runs  
+How many simulated paths you test.
+
+Demand shock (±10%)  
+Demand can randomly vary around base demand within this band.
+
+Common doubts
+- Is ±10% applied every period? Usually yes, independently per bi-week (depends on your module logic).
+- More MC runs = more accuracy? Yes but slower.
+
+---
+
+## Quick sanity checks (to avoid “weird” outputs later)
+✅ If W0 = 0, you must hire in Module 2 or production will collapse.  
+✅ If demand jumps sharply (B5/B6), late hiring becomes expensive → plan earlier.  
+✅ If you overproduce, warehouse overflow triggers liquidation losses.  
+✅ If you underproduce, lost sales penalty will dominate cost.
+
+
+""")
 
     # Quick highlights
     c1, c2, c3, c4 = st.columns(4)
