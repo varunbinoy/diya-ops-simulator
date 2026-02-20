@@ -80,7 +80,8 @@ def render_module1_preset_page():
     c1.metric("Horizon", f"{len(p['periods'])} bi-weeks")
     c2.metric("Initial workforce (W0)", f"{p['W0']}")
     c3.metric("Opening inventory (Inv0)", f"{p['Inv0']:,}")
-    c4.metric("Productivity", f"{p['p']:,} / worker / bi-week")
+    c4.metric("Productivity", f"{p['p']:,}")
+    c4.caption("units/worker/bi-week")
 
     st.divider()
 
