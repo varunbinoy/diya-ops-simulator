@@ -1082,6 +1082,7 @@ page = st.sidebar.radio(
     "Go to:",
     [
         "Home",
+        "How to Play",
         "Module 1 – Presets",
         "Module 2 – Sequential Planner",
         "Module 3 – Deterministic Summary",
@@ -1090,7 +1091,7 @@ page = st.sidebar.radio(
     ]
 )
 
-if page == "Home":
+elif page == "Home":
 
     st.title("🪔 Diya Manufacturing Operations Simulator")
 
@@ -1138,6 +1139,77 @@ if page == "Home":
     - Sustainable operational growth  
 
     Think like a consultant. Decide like a COO.
+    """)
+elif page == "How To Play":
+
+    st.title("📘 How To Play")
+
+    st.markdown("""
+    ## Overview
+
+    You are the Operations Head of Diya Manufacturing.
+    Your responsibility is to balance workforce growth,
+    cost stability, and attrition risk.
+
+    The simulator models long-term operational consequences
+    of short-term hiring decisions.
+
+    ---
+
+    ## Step-by-Step Guide
+
+    ### 1️⃣ Module 1 – Presets
+    Set baseline parameters:
+    - Initial workforce
+    - Attrition rate
+    - Salary assumptions
+    - Demand level
+
+    These assumptions drive the entire model.
+
+    ### 2️⃣ Module 2 – Sequential Planner
+    Decide how many employees to hire each period.
+
+    Over-hiring → Cost explosion  
+    Under-hiring → Capacity shortage  
+
+    Smart timing is critical.
+
+    ### 3️⃣ Module 3 – Deterministic Summary
+    View:
+    - Workforce evolution
+    - Total cost trajectory
+    - Attrition impact
+
+    This shows the direct impact of your decisions.
+
+    ### 4️⃣ Module 4 – Stress Test
+    Simulate:
+    - Demand shocks
+    - Attrition spikes
+    - Cost pressure
+
+    Test resilience of your strategy.
+
+    ### 5️⃣ Module 5 – Consultant Score
+    Your strategy is evaluated on:
+    - Stability
+    - Cost efficiency
+    - Risk control
+    - Margin sustainability
+
+    ---
+
+    ## Winning Strategy
+
+    The best strategies:
+    - Avoid extreme hiring spikes
+    - Absorb attrition smoothly
+    - Maintain predictable cost growth
+    - Balance scaling with stability
+
+    Think long-term.
+    Avoid reactive decisions.
     """)
 
 elif page == "Module 1 – Presets":
