@@ -1091,8 +1091,54 @@ page = st.sidebar.radio(
 )
 
 if page == "Home":
+
     st.title("🪔 Diya Manufacturing Operations Simulator")
-    st.write("Welcome. Navigate from the sidebar.")
+
+    st.markdown("""
+    ## 📖 The Story
+
+    You are the Operations Head of Diya Manufacturing.  
+    Demand fluctuates. Attrition is rising. Costs are increasing.  
+
+    Your challenge:  
+    Balance hiring, productivity, and churn while maintaining profitability.
+
+    Every decision impacts workforce stability and financial performance.
+
+    ---
+
+    ## 🎯 Objective
+
+    Manage operational decisions across multiple modules to:
+
+    - Stabilize workforce levels  
+    - Control hiring and salary costs  
+    - Reduce volatility  
+    - Maintain sustainable operating margins  
+
+    ---
+
+    ## 🕹 How To Play
+
+    1. Start with Module 1 – Presets to load baseline assumptions  
+    2. Use Module 2 – Sequential Planner to adjust hiring decisions  
+    3. Analyze operational output in Module 3 – Deterministic  
+    4. Test uncertainty in Module 4 – Stress Test  
+    5. Review overall performance in Module 5 – Consultant Score
+
+    ---
+
+    ## 🏆 Winning Strategy
+
+    Success requires:
+
+    - Smart hiring timing  
+    - Balanced cost structure  
+    - Controlled attrition impact  
+    - Sustainable operational growth  
+
+    Think like a consultant. Decide like a COO.
+    """)
 
 elif page == "Module 1 – Presets":
     render_module1_preset_page()
