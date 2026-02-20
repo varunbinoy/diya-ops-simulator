@@ -1091,7 +1091,7 @@ page = st.sidebar.radio(
     ]
 )
 
-elif page == "Home":
+if page == "Home":
 
     st.title("🪔 Diya Manufacturing Operations Simulator")
 
